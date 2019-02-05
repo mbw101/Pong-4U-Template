@@ -313,7 +313,7 @@ namespace Pong
             // draw ball using FillRectangle
             e.Graphics.FillEllipse(drawBrush, ball);
             
-            if ()
+            
             // draw scores to the screen using DrawString
             e.Graphics.DrawString("" + player1Score, drawFont, drawBrush, 0, 0);
             e.Graphics.DrawString("" + player2Score, drawFont, drawBrush, this.Width - 40, 0);
