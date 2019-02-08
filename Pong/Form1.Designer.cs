@@ -46,9 +46,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.startLabel.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startLabel.ForeColor = System.Drawing.Color.White;
-            this.startLabel.Location = new System.Drawing.Point(98, 171);
+            this.startLabel.Location = new System.Drawing.Point(95, 143);
             this.startLabel.Name = "startLabel";
-            this.startLabel.Size = new System.Drawing.Size(410, 93);
+            this.startLabel.Size = new System.Drawing.Size(410, 163);
             this.startLabel.TabIndex = 0;
             this.startLabel.Text = "Press Space To Start";
             this.startLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

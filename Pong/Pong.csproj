@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ramlogo.ico" />
+    <None Include="Resources\ARCADECLASSIC.TTF" />
     <None Include="Resources\collision.wav" />
     <None Include="Resources\score.wav" />
   </ItemGroup>

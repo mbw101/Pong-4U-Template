@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -27,7 +28,8 @@ namespace Pong
 
         //graphics objects for drawing
         SolidBrush drawBrush = new SolidBrush(Color.White);
-        Font drawFont = new Font("Courier New", 30);
+        Font drawFont = new Font("header 08_68 Regular", 30);
+        Font textFont = new Font("header 08_68 Regular", 24);
 
         // Sounds for game
         SoundPlayer scoreSound = new SoundPlayer(Properties.Resources.score);
@@ -59,6 +61,8 @@ namespace Pong
         public Form1()
         {
             InitializeComponent();
+
+            startLabel.Font = textFont;
         }
 
         // -- YOU DO NOT NEED TO MAKE CHANGES TO THIS METHOD
@@ -121,6 +125,7 @@ namespace Pong
         /// </summary>
         private void SetParameters()
         {
+            // reset game
             if (newGameOk)
             {
                 player1Score = player2Score = 0;
@@ -212,7 +217,10 @@ namespace Pong
             // check collision at top or bottom and play sound
             if (ball.Y + ball.Height >= this.Height || ball.Y < 0)
             {
+                // flip the direction of the ball
                 ballMoveDown = !ballMoveDown;
+
+                // play collision sound
                 collisionSound.Play();
             }
 
@@ -220,9 +228,13 @@ namespace Pong
 
             #region ball collision with paddles
 
+            // if the ball collides with either paddle
             if (p1.IntersectsWith(ball) || p2.IntersectsWith(ball))
             {
+                // flip the direction of the ball
                 ballMoveRight = !ballMoveRight;
+
+                // play collision sound
                 collisionSound.Play();
             }
 
@@ -248,7 +260,7 @@ namespace Pong
                 else
                 {
                     SetParameters();
-                    ballMoveRight = false;
+                    ballMoveRight = true;
                 }
             }
             if (ball.X >= this.Width - ball.Width)
@@ -269,7 +281,7 @@ namespace Pong
                 else
                 {
                     SetParameters();
-                    ballMoveRight = true;
+                    ballMoveRight = false;
                 }
             }
 
@@ -293,6 +305,7 @@ namespace Pong
 
             // --- show a message on the startLabel to indicate a winner, (need to Refresh).
             startLabel.Text = winner + " wins!";
+            //startLabel.Font = drawFont;
             startLabel.Visible = true;
             this.Refresh();
 
@@ -307,17 +320,21 @@ namespace Pong
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             // draw paddles using FillRectangle
+            drawBrush.Color = Color.Red;
             e.Graphics.FillRectangle(drawBrush, p1);
+            drawBrush.Color = Color.Blue;
             e.Graphics.FillRectangle(drawBrush, p2);
 
-            // draw ball using FillRectangle
+            // draw ball using FillEllipse
+            drawBrush.Color = Color.Purple;
             e.Graphics.FillEllipse(drawBrush, ball);
-            
-            
-            // draw scores to the screen using DrawString
-            e.Graphics.DrawString("" + player1Score, drawFont, drawBrush, 0, 0);
-            e.Graphics.DrawString("" + player2Score, drawFont, drawBrush, this.Width - 40, 0);
-        }
 
+            // draw scores to the screen using DrawString
+            drawBrush.Color = Color.Red;
+            e.Graphics.DrawString("" + player1Score, drawFont, drawBrush, (this.Width / 2) - 70, 0);
+
+            drawBrush.Color = Color.Blue;
+            e.Graphics.DrawString("" + player2Score, drawFont, drawBrush, (this.Width / 2) + 40, 0);
+        }
     }
 }
