@@ -45,8 +45,10 @@ namespace Pong
         //ball directions, speed, and rectangle
         Boolean ballMoveRight = true;
         Boolean ballMoveDown = true;
-        const int BALL_SPEED = 4;
+        int BALL_SPEED = 4;
         Rectangle ball;
+
+        Random random = new Random(); 
 
         //paddle speeds and rectangles
         const int PADDLE_SPEED = 4;
@@ -55,7 +57,7 @@ namespace Pong
         //player and game scores
         int player1Score = 0;
         int player2Score = 0;
-        int gameWinScore = 2;  // number of points needed to win game
+        const int gameWinScore = 5;  // number of points needed to win game
 
         #endregion
 
@@ -132,7 +134,7 @@ namespace Pong
                 player1Score = player2Score = 0;
                 newGameOk = false;
                 startLabel.Visible = false;
-                titleLabel.Visible = false;
+                titleLabel.Visible = false;               
                 gameUpdateLoop.Start();
             }
 
@@ -140,7 +142,7 @@ namespace Pong
             const int PADDLE_EDGE = 20;  // buffer distance between screen edge and paddle            
 
             p1.Width = p2.Width = 10;    //height for both paddles set the same
-            p1.Height = p2.Height = 40;  //width for both paddles set the same
+            p1.Height = p2.Height = 60;  //width for both paddles set the same
 
             //p1 starting position
             p1.X = PADDLE_EDGE;
@@ -158,6 +160,9 @@ namespace Pong
 
             // set starting Y position for ball to middle of screen, (use this.Height and ball.Height)
             ball.Y = this.Height / 2 - ball.Height / 2;
+
+            // reset ball speed to normal
+            BALL_SPEED = 5;
         }
 
         /// <summary>
@@ -237,6 +242,15 @@ namespace Pong
 
                 // play collision sound
                 collisionSound.Play();
+
+                // generate random number
+                int randomNumber = random.Next(1, 10);
+
+                // 20% for power up
+                if (randomNumber <= 2)
+                {
+                    BALL_SPEED++;
+                }
             }
 
             #endregion
