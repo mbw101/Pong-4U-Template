@@ -34,6 +34,7 @@ namespace Pong
         // Sounds for game
         SoundPlayer scoreSound = new SoundPlayer(Properties.Resources.score);
         SoundPlayer collisionSound = new SoundPlayer(Properties.Resources.collision);
+        SoundPlayer biggieSound = new SoundPlayer(Properties.Resources.biggie);
 
         //determines whether a key is being pressed or not
         Boolean aKeyDown, zKeyDown, jKeyDown, mKeyDown;
@@ -245,10 +246,12 @@ namespace Pong
             if (ball.X < 0)  // ball hits left wall logic
             {
                 // play score sound
-                scoreSound.Play();
+                biggieSound.Play();
 
                 // update player 2 score
                 player2Score++;
+
+                Thread.Sleep(2000);
 
                 // use if statement to check to see if player 2 has won the game. If true run 
                 // GameOver method. Else change direction of ball and call SetParameters method.
@@ -266,10 +269,12 @@ namespace Pong
             if (ball.X >= this.Width - ball.Width)
             {
                 // play score sound
-                scoreSound.Play();
+                biggieSound.Play();
 
                 // update player 2 score
                 player1Score++;
+
+                Thread.Sleep(2000);
 
                 // use if statement to check to see if player 1 has won the game. If true run 
                 // GameOver method. Else change direction of ball and call SetParameters method.
